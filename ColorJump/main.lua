@@ -4,6 +4,7 @@ require 'painter'
 require 'camera'
 require 'checker'
 
+mainFont = love.graphics.newFont("Simon-Regular.otf", 20)
 gameOver = false
 Screen_width = love.graphics.getWidth()
 Screen_height = love.graphics.getHeight()
@@ -16,6 +17,7 @@ function love.load()
 end
 
 function love.draw()
+  love.graphics.setFont(mainFont)
   if gameOver == false then
     camera:set()
       player_Draw()
@@ -23,11 +25,12 @@ function love.draw()
       painters_Draw()
     camera:unset()
     love.graphics.setColor(255,255,255)
-    love.graphics.print(points,0,0,0,2,2)
+    love.graphics.print("points : "..points,0,0)
   else
     love.graphics.setColor(255,255,255)
-    love.graphics.print("GAME OVER",250,Screen_height/2,0,2,2)
-    love.graphics.print("press 'esc' to restart",250,Screen_height/1.5,0,2,2)
+    love.graphics.print("GAME OVER",270,270)
+    love.graphics.print("press 'esc' to restart",270,320)
+    love.graphics.print("points : " .. points, 270, 350)
   end
 end
 
@@ -37,12 +40,14 @@ function love.update(dt)
     player_Update(dt)
     dots_Update(dt)
     painters_Update(dt)
+    dots_Collision(dt)
     camera.x = player.x - Screen_width/2
     camera.y = player.y - Screen_height/2
   else
     if love.keyboard.isDown("escape") then
       player.x = Screen_width/2
       player.y = 499
+      points = 0
       player.color = {255,255,255}
       gameOver = false
     end
