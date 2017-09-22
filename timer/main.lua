@@ -11,8 +11,8 @@ wskazowkaSec = {
   dif = -1
 }
 timeSec = 0
-timeMin = 25
-timeH = 4
+timeMin = 32
+timeH = 1
 sekunda = 0
 
 function generateKreski()
@@ -68,7 +68,7 @@ function love.update(dt)
   wskazowkaSecUpdate(dt)
   wskazowkaMinUpdate(dt)
   wskazowkaHUpdate(dt)
-  wskazowkaSec.dif = wskazowkaSec.dif + (dt/15)
+  wskazowkaSec.dif = 3 + (timeSec/15)
 
   -- wskazowkaMin.dif = -1 + (wskazowkaSec.dif/60)
   --
